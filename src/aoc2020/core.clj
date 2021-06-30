@@ -36,5 +36,15 @@
 
 (euler-1 (range 1 1000))
 
-;;(defn euler-2
-;;  )
+(defn euler-2
+  "Find the sum of all even Fibonacci numbers < 4 million "
+  []
+  (let [target 4000000]
+    (loop [f1 1 f2 1 sum-of-evens 0]
+      (if (<= f2 target)
+        (let [f3 (+ f1 f2)
+              sum (if (even? f3) (+ sum-of-evens f3) sum-of-evens)]
+          (recur f2 f3 sum))
+        sum-of-evens))))
+
+(euler-2)
