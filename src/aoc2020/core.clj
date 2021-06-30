@@ -36,5 +36,5 @@
 
 (euler-1 (range 1 1000))
 
-(defn euler-2
-  )
+;;(defn euler-2
+;;  )
