@@ -1,7 +1,8 @@
 (ns aoc2020.core
   {:clj-kondo/config '{:linters {:unresolved-symbol {:exclude [FLOOR]}}}}
   (:require [clojure.string :as str]
-            [clojure.math.numeric-tower :as math])
+            [clojure.math.numeric-tower :as math]
+            [criterium.core :as c])
   (:gen-class))
 
 
@@ -63,24 +64,3 @@
       (with-precision 0 :rounding FLOOR (f n)))))
 
 (transduce (map fib) + (range 0N 1000 3))
-
-(map fib (range 0 51 3))
-
-(keyword "1")
-;; => (0
-;;     2
-;;     8
-;;     34
-;;     144
-;;     610
-;;     2584
-;;     10946
-;;     46368
-;;     196418
-;;     832040
-;;     3524578
-;;     14930352
-;;     63245986
-;;     267914296
-;;     1134903170
-;;     4807526976);; => 4807526976
