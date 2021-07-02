@@ -40,6 +40,16 @@
 
 (euler-1 (range 1 1000))
 
+(defmacro time-it
+  "Times stuff"
+  [expr]
+  `(do
+     (println "Running timing for " (quote ~expr))
+     (eval (macroexpand '(c/bench ~expr))))
+  )
+
+;; Baseline
+
 (defn euler-2
   "Find the sum of all even Fibonacci numbers < 4 million "
   []
@@ -65,23 +75,19 @@
     (biginteger
       (with-precision 0 :rounding FLOOR r))))
 
+(macroexpand '(time-it (println "hello")))
+
+(time-it (+ 1 1))
+
 (transduce (map fib) + (range 0N 1000 3))
-([
-  (time (euler-2))
-  (time (transduce
-          (comp (map fib)
-                (filter #(< % 4000000)))
-          + (range 0 34 3)))
-
-  (time (r/fold + (r/filter #(< % 4000000) (r/map fib (range 0 34 3)))))
-
-  (time (reduce + (filter #(< % 4000000) (map fib (range 0 34 3)))))
-  ])
-
-(fib 0)
-
-(range 0 34 3)
-
-(keyword "1")
-
-(map #(dotimes [n 10] %))
+;;(map c/bench [
+;;  (time (euler-2))
+;;  (time (transduce
+;;          (comp (map fib)
+;;                (filter #(< % 4000000)))
+;;          + (range 0 34 3)))
+;;
+;;  (time (r/fold + (r/filter #(< % 4000000) (r/map fib (range 0 34 3)))))
+;;
+;;  (time (reduce + (filter #(< % 4000000) (map fib (range 0 34 3)))))
+;;  ])
