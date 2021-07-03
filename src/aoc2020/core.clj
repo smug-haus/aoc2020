@@ -48,6 +48,15 @@
      (eval (macroexpand '(c/bench ~expr))))
   )
 
+
+(defmacro time-it-2
+  "Times stuff"
+  [expr]
+  `(do
+     (println "Running timing for " (quote ~expr))
+     (c/bench ~expr))
+  )
+
 ;; Baseline
 
 (defn euler-2
@@ -61,7 +70,7 @@
           (recur f2 f3 sum))
         sum-of-evens))))
 
-(time (euler-2))
+(time-it-2 (euler-2))
 
 (defn fib
   "Using Binet's formula"
